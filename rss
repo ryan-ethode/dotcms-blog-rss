@@ -1,0 +1,69 @@
+#set ($query="+structureName:Blog +(conhost:48190c8c-42c4-46af-8d1a-0cd5db894797 conhost:SYSTEM_HOST), 10, modDate desc")
+
+<xml version="1.0" encoding="UTF-8">
+<rss version="2.0">
+  <channel>
+  <pubDate>1 Jan 2006 23:23:04 GMT</pubDate>
+  <title>Company Blog</title>
+  <description>Tips and Tricks</description>
+  <link>http://www.website.com/blog/</link>
+  <copyright>2006-2015 Company Name</copyright>
+  <managingEditor>name@email.com</managingEditor>
+  <language>en</language>
+  <image>
+    <url>http://www.website.com/images/some.jpg</url>
+    <link>http://www.website.com/blog/</link>
+    <title>Website Blog</title>
+  </image>
+
+#pullContent("$query" "10" "modDate desc")
+#if ($list.size() > 0)
+    #foreach ($content in $list)
+
+        <item>
+        <title><![CDATA[$content.title]]></title>
+        <pubDate>$date.format('d MMM yyyy kk:mm:ss Z',$content.sysPublishDate)</pubDate>
+        <link>http://www.website.com/blog/$content.urlTitle</link>
+        <guid>http://www.website.com/blog/$content.urlTitle</guid>
+        <author>$content.author</author>
+        <category>
+                #foreach($cat in $content.topic)
+                  #set ($category = $categories.getCategoryByInode("$cat"))
+                  #if ($velocityCount != $content.topic.size())
+                    $category.topic,
+                  #else
+                    $category.topic
+                  #end
+                #end
+        </category>
+        <description>$content.body></description>
+      </item>
+    #end
+</channel></rss>
+#else
+  #if($EDIT_MODE)
+   [There are no results matching your query.]
+   #else
+   <p>Sorry, there are no podcasts available at this time.</p>
+  #end
+#end
+
+Here's the page that gets rendered:
+
+<html>
+<head></head>
+<body>
+<xml encoding="UTF-8" version="1.0">
+<rss version="2.0">
+  <channel>
+  <pubdate>1 Jan 2006 23:23:04 GMT</pubdate>
+  <title>Company Blog</title>
+  <description>Tips and Tricks</description>
+  <link>http://www.website.com/blog/</link>
+  <copyright>2006-2015 Company Name</copyright>
+  <managingeditor>name@email.com</managingeditor>
+  <language>en</language>
+  <img>
+    <url>http://www.website.com/images/some.jpg</url>
+    <link>http://www.website.com/blog/
+    <title>Company Blog</title>
