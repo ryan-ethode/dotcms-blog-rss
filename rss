@@ -47,23 +47,3 @@
    <p>Sorry, there are no podcasts available at this time.</p>
   #end
 #end
-
-Here's the page that gets rendered:
-
-<html>
-<head></head>
-<body>
-<xml encoding="UTF-8" version="1.0">
-<rss version="2.0">
-  <channel>
-  <pubdate>1 Jan 2006 23:23:04 GMT</pubdate>
-  <title>Company Blog</title>
-  <description>Tips and Tricks</description>
-  <link>http://www.website.com/blog/</link>
-  <copyright>2006-2015 Company Name</copyright>
-  <managingeditor>name@email.com</managingeditor>
-  <language>en</language>
-  <img>
-    <url>http://www.website.com/images/some.jpg</url>
-    <link>http://www.website.com/blog/
-    <title>Company Blog</title>
